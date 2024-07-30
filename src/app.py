@@ -1,23 +1,27 @@
-from flask import Flask, request, jsonify
-import joblib
-import numpy as np
-
-# Initialize Flask application
-app = Flask(__name__)
-
-knn_model = joblib.load('../knn_model.joblib')  # Adjust the path if needed
+import pytest
+import json
+from src.app import app  # Correct import statement
 
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    data = request.get_json(force=True)
-    features = np.array(data['features']).reshape(1, -1)
-    prediction = knn_model.predict(features)
-    response = {
-        'prediction': int(prediction[0])
+@pytest.fixture
+def client():
+    app.config['TESTING'] = True
+    with app.test_client() as client:
+        yield client
+
+
+def test_predict(client):
+    # Sample test data
+    test_data = {
+        'features': [5.1, 3.5, 1.4, 0.2]  # Example features
     }
-    return jsonify(response)
 
+    # Make a POST request to the /predict endpoint
+    response = client.post('/predict', data=json.dumps(test_data),
+                           content_type='application/json')
 
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    # Verify the response
+    assert response.status_code == 200
+    response_data = response.get_json()
+    assert 'prediction' in response_data
+    assert isinstance(response_data['prediction'], int)
