@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 knn_model = joblib.load('knn_model.joblib')
 
+
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json(force=True)
