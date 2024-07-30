@@ -5,7 +5,7 @@ import numpy as np
 # Initialize Flask application
 app = Flask(__name__)
 
-knn_model = joblib.load('../knn_model.joblib')  # Adjust the path if needed
+knn_model = joblib.load('./knn_model.joblib')  # Adjust the path if needed
 
 
 @app.route('/predict', methods=['POST'])
