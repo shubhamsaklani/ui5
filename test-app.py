@@ -2,7 +2,6 @@ import pytest
 import json
 from your_module import app  # Import your Flask app
 
-# If your app is in a different module, adjust the import accordingly
 
 @pytest.fixture
 def client():
@@ -16,10 +15,11 @@ def test_predict(client):
     test_data = {
         'features': [5.1, 3.5, 1.4, 0.2]  # Example features
     }
-    
+
     # Make a POST request to the /predict endpoint
-    response = client.post('/predict', data=json.dumps(test_data), content_type='application/json')
-    
+    response = client.post('/predict', data=json.dumps(test_data),
+                           content_type='application/json')
+
     # Verify the response
     assert response.status_code == 200
     response_data = response.get_json()
