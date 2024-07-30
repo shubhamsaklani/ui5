@@ -1,5 +1,6 @@
 import pytest
 import json
+from app import app  # Correct import statement
 
 @pytest.fixture
 def client():
