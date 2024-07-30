@@ -1,9 +1,5 @@
 import pytest
 import json
-from flask import Flask
-from flask.testing import FlaskClient
-import joblib
-import numpy as np
 from your_module import app  # Import your Flask app
 
 # If your app is in a different module, adjust the import accordingly
@@ -13,6 +9,7 @@ def client():
     app.config['TESTING'] = True
     with app.test_client() as client:
         yield client
+
 
 def test_predict(client):
     # Sample test data
