@@ -38,7 +38,7 @@ jobs:
       - name: Run tests
         env:
           PYTHONPATH: ${{ github.workspace }}/src
-        run: pytest
+        run: pytest --maxfail=1 --disable-warnings -q
 
   deploy:
     runs-on: ubuntu-latest
