@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import joblib
 import numpy as np
+
 # Initialize Flask application
 app = Flask(__name__)
 
@@ -15,6 +16,7 @@ def predict():
         'prediction': int(prediction[0])
     }
     return jsonify(response)
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
