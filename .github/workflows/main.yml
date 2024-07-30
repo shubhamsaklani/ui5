@@ -36,8 +36,7 @@ jobs:
         run: |
           pip show pytest
       - name: Run tests
-        env:
-          PYTHONPATH: ${{ github.workspace }}/src
+        
         run: pytest --maxfail=1 --disable-warnings -q
 
   deploy:
