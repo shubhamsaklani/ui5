@@ -1,14 +1,12 @@
 import pytest
 import json
-from your_module import app  # Import your Flask app
-
+from src.app import app  # Correct import statement
 
 @pytest.fixture
 def client():
     app.config['TESTING'] = True
     with app.test_client() as client:
         yield client
-
 
 def test_predict(client):
     # Sample test data
