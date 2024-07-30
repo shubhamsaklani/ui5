@@ -1,6 +1,6 @@
 import pytest
 import json
-from home.runner.work.ui5.ui5.app import app  # Correct import statement
+from app import app  # Correct import statement
 
 @pytest.fixture
 def client():
